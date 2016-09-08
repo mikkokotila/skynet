@@ -38,72 +38,64 @@ NOTE: all are tab separated. Minimum is 7 columns, but in case of more than one 
 
 ## Setting Up the Router
 
-This is the correct version
+This will take about 5 minutes, which is mostly waiting. First you have to get the right firmware: 
 
 http://download.villagetelco.org/firmware/secn/unstable/ar150/SECN-5-VT-RACHEL/Alpha3/openwrt-SECN-5.0-AR150-RACHEL-Alpha3-AR150-ar150-squashfs-sysupgrade.bin
 
+Once you have it, check the checksum: 
+
 md5sum: http://download.villagetelco.org/firmware/secn/unstable/ar150/SECN-5-VT-RACHEL/Alpha3/md5sums-SECN-5.0-AR150-RACHEL-Alpha3.txt
 
+After that you can connect to the GLi-ar150 through http://192.168.8.1 and login with the details written on the bottom of the casing. It asks you to change the password, but we're not worried about that because the firmware upgrade is going to change that anyways. 
 
+Once you've succesfully upgraded the firmware, you should see a wireless network you can connect to 'VT-RACHEL'. Once connected to the network, you can access HOME, ADMIN and SECN in your browser. 
 
-However, if you want to do something immediately to adapt the VT-Rachel firmware then please feel free to do so. Note however that there are two pre-defined modes of operation with only limited ability to change settings via the admin GUI screen, plus a mode called "SECN-Advanced". 
+http://vtrachel = HOME
+http://vtrachel/admin = ADMIN
+http://vtrachel/secn = SECN
 
-If you want to make more general changes either through the SECN GUI or via ssh, then you need to set the mode to SECN-Advanced, otherwise your changes will get over-written on restart.
+While ADMIN is for regular configuration, you have to use SECN for full configuration. Note that the mode has to be set to "SECN Advanced" on the admin screen for changes to be effective in SECN screens. 
+
+NOTE ON SSH: If you want to make changes with ssh, you have to first set SECN-Advanced, as otherwise your changes will get over-written on restart of the router. 
+
+#### Turning on SECN-Advanced
 
 The mode setting in on the VT-RACHEL admin page at http://vtrachel/admin. This setting is used to run the device with Ethernet WAN or Mesh WAN, or to put it into SECN-Advanced mode where you can make whatever changes you like.
 
 Note also that the LAN port is restricted by default. Only the Fallback IP address is operational by default.
 This has been done to prevent network issues caused by users plugging the upstream school network into the LAN port instead of the WAN port and causing DHCP server conflicts.
 
+#### How to connect with ssh? 
+
+Note that before connecting with ssh, you have to have turn on SECN-Advanced (see instructions above). Then connect with:
+
+    ssh root@10.130.1.254
+
 For reference, there is a page on the VT Wiki describing the VT-Rachel firmware here:
 
        http://wiki.villagetelco.org/RACHEL_on_MP2
 
 
-There are two default user accounts set up on the VT-Rachel firmware as follows:
+#### What users are created for the firmware? 
 
-User             Password
-root              vtrachel
-admin           rachel
+root:vtrachel # The "root" account will also give you ssh access.
+admin:rachel  # The "admin" account allows you to make changes using the GUI only. 
 
-The "admin" account allows you to make changes using the GUI only. 
-The "root" account will also give you ssh access.
+##### /www/index.html
 
-There are three different web GUI screens in operation as follows:
+This is the initial splash page.
 
-A) http://vtrachel/  or http://vtrachel/rachel   or http://vtrachel/rachel/index.html
-This is the RACHEL home page for users
+##### /www/rachel/rachel.index.html
 
-B) http://vtrachel/admin or http://vtrachel/admin/index.html
-This is the configuration page for the basic VT-RACHEL operation, intended for use by teachers.
+This is the Home page. You need to name it to match the link above.The content of this file points to the various module directories, so you can just edit it to remove the ones you don't want and to add new ones.
 
-C) http://vtrachel/secn  or  http://vtrachel/secn/index.html
-This is for the full SECN configuration screens for advanced use.
-Note that the mode has to be set to "SECN Advanced" on the admin screen for changes to be effective in these screens.
+##### /etc/init.d/set-rachel.sh
 
-You can also use the IP address in lieu of the "vtrachel" name. The default IP is 10.130.1.254
+This is the initialization script where the memory device is mapped in to the system and the location of the public directory is set. 
 
-As noted above, the firmware is set up for a fairly specific purpose of serving up the RACHEL library content, but you can modify a few script files to change the operation as below.
+##### setting up default home page from command line 
 
-A)  /www/index.html
-
-Specifically
-<a style="color: white; text-decoration: none" href="/rachel"> Loading RACHEL...</a>
-
-B)   /etc/init.d/set-rachel.sh
-
-This startup script is where the default home page is set up and where the memory device is mapped into the file system. 
-
-See references to /www/rachel for the default home page.
-Specifically the link to the Home page:
-
-# Set up default home page
 ln -s -f /www/rachel/rachel.index.html   /www/rachel/index.html
-
-C)  /www/rachel/rachel.index.html
-
-This is the Home page. You need to name it to match the link above.
-The content of this file points to the various module directories, so you can just edit it to remove the ones you don't want and to add new ones.
 
 
 ### How to reset GLi-ar150
