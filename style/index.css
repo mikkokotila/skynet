@@ -1,0 +1,54 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+.navi {
+  font-size: 25px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+}
+
+.language {
+  font-weight: bold;
+  color: gray;
+  padding-bottom: 20px;
+}
+
+.col-lg-4 {
+  height: 300px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 0px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+  padding-bottom: 0px;
+}
+.marketing .col-lg-4 p {
+  margin-right: 30px;
+  margin-left: 10px;
+}
