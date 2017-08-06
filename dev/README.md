@@ -70,8 +70,9 @@ You want to make sure that at this point the USB you are using is empty.
     
 That should leave you with the link between the /www where content is served to the browser, and the USB stick. Now let's create a simple test to make sure that everything works.
 
-    echo "<br><br><h1>Testing USB</h1><a href=\'./sda1/index.html\'>test</a>" > /www/test.html
-    echo -e "<br><br><br><h3>Test is passed! </h3>" > /mnt/sda1/index.html
+    USB_DEVICE=$(echo $USB_PATH | cut -d/ -f2)
+    echo "<br><br><h1>Testing USB</h1><a href='./"$USB_DEVICE"/index.html'>test</a>" > /www/test.html
+    echo -e "<br><br><br><h3>Test is passed! </h3>" > "$USB_PATH"/index.html
     
 Now open your browser and go to 192.168.8.1/test.html and click the 'test' link. In case you get the confirmation, then it means that now we can link from the AR-150 webroot to the USB. Which is very cool as we don't have to change any system configuration files.
 
