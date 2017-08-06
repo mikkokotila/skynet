@@ -8,6 +8,20 @@
 
 ## GETTING STARTED
 
+### Before getting started
+
+It's a good idea to have the AR-150 on an internet connection. Either you can plug it to your router (with internet connection) using a LAN cable, or you can connect it through one of the other options provided: 
+
+- repeater (wifi) 
+- USB modem
+- tethering (not sure how this works) 
+
+Unless you are using a cable connection, you have to login to the admin panel to connect the AR-150 to your internet connection. 
+
+1) go to 192.168.8.1
+2) key in the admin password 'goodlife'
+3) go to wan settings 
+
 ### Upgrade the firmware
 
 Before anything else, it's better to login to the admin panel provided in the factory default firmware, and update it to the latest one. To do this, you have to: 
@@ -75,6 +89,3 @@ We're going through these extra hoops now for two reasons:
 
 1) we want to keep access to AR-150 factory admin panel (which also gives us access to openwrt admin panel) 
 2) we want to stay as close to possible to the factory setting (as in to avoid issues with firmware updates etc) 
-    
-
-
