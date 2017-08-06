@@ -23,3 +23,28 @@ Before anything else, it's better to login to the admin panel provided in the fa
 
 If you need to get a detailed information on how to update the firmware, you can get it [here](https://gl-inet.com/docs/mini/firmware/)
 
+### Connecting with SSH 
+
+In order to do what we want to do, you'll need to make an ssh connection to the AR-150. It should be very simple: 
+
+    ssh rooth@192.168.8.1
+    
+In case you get an error message that ends with: 
+
+    RSA host key for 192.168.8.1 has changed and you have requested strict checking.
+    Host key verification failed.
+
+Then remove ~.ssh/known_hosts file. If you think you might lose something important, then take a backup of it first. Note that once you do this, you still might get an error once more, but try it again and it should as you for a password and then you can login. The password is 'goodlife'. 
+
+Once you're in, we will want to do a couple of things. 
+
+##### Check that your USB is mounting ok 
+
+    df 
+    
+In return you should get a list that ends with something like: 
+
+    /dev/sda1              3904100   1954784   1949316  50% /mnt/sda1
+    
+
+
